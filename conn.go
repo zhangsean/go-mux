@@ -529,7 +529,7 @@ func (Self *sendWindow) WriteTo() (p []byte, sendSize uint32, part bool, err err
 	if Self.closeOp {
 		return nil, 0, false, errors.New("conn.writeWindow: window closed")
 	}
-	if Self.off == uint32(len(Self.buf)) {
+	if Self.off >= uint32(len(Self.buf)) {
 		return nil, 0, false, io.EOF
 		// send window buff is drain, return eof and get another one
 	}
